@@ -8,4 +8,4 @@ var router = express.Router();
 router.get('/', function (req, res) {
   res.send('Index file');
 });
-module.exports = router; // export = router;
+module.exports = router;

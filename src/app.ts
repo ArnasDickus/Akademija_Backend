@@ -1,11 +1,11 @@
 import createError from 'http-errors';
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require("cors");
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+const cors = require('cors');
+// import cors from 'cors';
 
-var indexRouter = require('./routes/index');
+var indexRouter =  require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPIRouter = require("./routes/testAPI");
 
@@ -24,8 +24,9 @@ app.use('/users', usersRouter);
 app.use("/testAPI", testAPIRouter);
 
 // catch 404 and forward to error handler
-app.use(function( req: any, res: any, next: any) {
+app.use(( req: any, res: any, next: any) => {
   next(createError(404));
 });
 
-module.exports = app;
+// module.exports = app;
+export default app;

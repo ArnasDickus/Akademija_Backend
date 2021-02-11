@@ -6,12 +6,13 @@
 import app  from '../app';
 import Debug from "debug";
 import http from 'http';
+import { AddressInfo } from 'net';
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
-const normalizePort = (val: any) => {
+const normalizePort = (val: string) => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -31,7 +32,15 @@ const normalizePort = (val: any) => {
  * Event listener for HTTP server "error" event.
  */
 
-const onError = (error: any) => {
+type ErrorType = {
+  errno: string;
+  code: string;
+  syscall: string;
+  address: string;
+  port: number;
+}
+
+const onError = (error: ErrorType) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -60,11 +69,13 @@ const onError = (error: any) => {
  */
 
 const onListening = () => {
-  const addr = server.address();
-  const bind = typeof addr === 'string'
+  const addr = server.address() as AddressInfo;
+    const bind = typeof addr === 'string'
     ? 'pipe ' + addr
-    : 'port ' + addr?.port;
+    : 'port ' + addr.port;
   debug('Listening on ' + bind);
+    
+  
 }
 
 /**

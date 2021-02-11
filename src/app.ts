@@ -1,15 +1,14 @@
 import createError from 'http-errors';
-import express from 'express';
+import express, {Request, Response, NextFunction} from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-const cors = require('cors');
-// import cors from 'cors';
+import cors from 'cors';
 
-var indexRouter =  require('./routes/index');
-var usersRouter = require('./routes/users');
-var testAPIRouter = require("./routes/testAPI");
+const indexRouter =  require('./routes/index');
+const usersRouter = require('./routes/users');
+const testAPIRouter = require("./routes/testAPI");
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('view engine', 'jade');
@@ -24,7 +23,7 @@ app.use('/users', usersRouter);
 app.use("/testAPI", testAPIRouter);
 
 // catch 404 and forward to error handler
-app.use(( req: any, res: any, next: any) => {
+app.use(( req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 
